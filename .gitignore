@@ -1,4 +1,4 @@
 env
 .ENV
 .DS_Store
-.jpg
+*.cropped

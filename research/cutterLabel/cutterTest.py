@@ -8,9 +8,10 @@ dotenv.load_dotenv(dotenvFile)
 
 dataPath = os.getenv('DATAPATH')
 
-# TO DELETE
-#im = Image.open(r"img.jpg")
-#width, height = im.size
+if 'DATAPATH' in os.environ:
+    print("env path var : OK")
+else:
+    raise Exception("ERROR : il faut préciser le chemin vers le dossier de Data dans le .ENV : DATAPATH=\'votre/chemin/abosolu/vers/data\'")
 
 
 # pourcours train test valid/ ...
