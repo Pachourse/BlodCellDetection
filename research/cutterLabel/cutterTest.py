@@ -13,6 +13,9 @@ if 'DATAPATH' in os.environ:
 else:
     raise Exception("ERROR : il faut préciser le chemin vers le dossier de Data dans le .ENV : DATAPATH=\'votre/chemin/abosolu/vers/data\'")
 
+if not os.path.exists("transform") :
+    os.mkdir("transform")
+
 
 # pourcours train test valid/ ...
 for partPath in ["train", 'test', "valid"] :
