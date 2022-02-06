@@ -252,13 +252,14 @@ class WhiteBloodCellClassification:
         return np.uint8(ori * shape)
 
     @staticmethod
-    def resize(cell, open_file=False, crop=True):
+    def resize(cell, open_file=False, crop=True, resize=True):
         """
         Primarily used for training since the source shape of the image are too big (500x500) we convert
         it to a 128x128 shape
         :param cell: the source file
         :param open_file:  is the file currently open
         :param crop: default True, if the resolution is already 128x128 it should be se to False
+        :param resize: default True, resize the image to 128x128
         :return: the image in grayscale and the origin
         """
         if open_file:
@@ -270,6 +271,7 @@ class WhiteBloodCellClassification:
             cell = np.delete(cell, np.s_[0:150], axis=0)
             cell = np.delete(cell, np.s_[shape[0] - 150:shape[0]], axis=1)
             cell = np.delete(cell, np.s_[0:150], axis=1)
+        if resize:
             # resizing
             cell = cv2.resize(cell, (128, 128), interpolation=cv2.INTER_AREA)
         ori = np.copy(cell)
