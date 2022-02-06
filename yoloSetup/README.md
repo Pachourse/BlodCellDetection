@@ -46,8 +46,7 @@ python detect.py --weights ~/BloodCellDetection/yoloSetup/best.pt --img 416 --sa
 
 Be shure to have the `--save-txt` option to have a `.txt` file as entry for the next program.
 
-Inspired by this tutorial Tutorial :
-https://colab.research.google.com/drive/1gDZ2xcTOgR39tGGs-EZ6i3RTs16wmzZQ#scrollTo=1Rvt5wilnDyX
+Inspired by [this tutorial](https://colab.research.google.com/drive/1gDZ2xcTOgR39tGGs-EZ6i3RTs16wmzZQ#scrollTo=1Rvt5wilnDyX)
 
 ## Use results
 
