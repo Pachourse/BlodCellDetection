@@ -3,14 +3,16 @@
 # Installation guide
 
 ## Files to edit
+
 ```
 ├── BloodCell-Detection-Datatset    -   dataset git repository
 ├── BloodCellDetection              -   this git repository
 │   └── folder where is this readme
 └── yolo5                           -   yolov5 git remository
-``` txt
+```
 
 operations to execute on files : 
+
 
 ```
 mv ~/BloodCell-Detection-Datatset/data.yaml ~/yolo5/
