@@ -10,6 +10,22 @@ import zipfile
 from lib import WhiteBloodCellClassification as WBCC
 wbcc = WBCC()
 
+#params
+customResizeBool = True
+url = 'http://viallet.me/model.zip'
+
+
+def customResize(img) : 
+    # resizing image in 128 by 128
+    img = cv2.resize(img, (128, 128), interpolation = cv2.INTER_AREA)
+    #plt.show(img)
+    print('New Dimensions : ', img.shape)
+
+    if img.shape != (128, 128, 3) :
+        raise Exception("ERROR : resize didn't work")
+    else :
+        print("OK - image resized")
+
 def checkInstall() :
     if "model" in os.listdir() :
         print("model is installed")
@@ -20,7 +36,6 @@ def checkInstall() :
         print("zip file already installed")
     else :
         print("downloading model")
-        url = 'http://viallet.me/model.zip'
         wget.download(url)
     
     #unzip model
@@ -42,11 +57,13 @@ if __name__ == "__main__" :
         img = cv2.imread(path, cv2.IMREAD_UNCHANGED)
     except Exception :
         raise Exception("ERROR : can't open file")
-    print('Old dimensions : ',img.shape)
+    print('Original Dimensions : ',img.shape)
 
-    # image processing
-    img, old = WBCC.resize(img)
-    print('New dimensions : ',img.shape)
+    if customResizeBool :
+        img = customResize(img)
+        img, old = WBCC.get_grayscale(img)
+    else :
+        img, old = WBCC.resize(img)
 
     # calling AI on image
     checkInstall()

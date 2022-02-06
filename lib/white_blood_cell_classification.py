@@ -229,6 +229,13 @@ class WhiteBloodCellClassification:
         )
 
     @staticmethod
+    def get_grayscale(cell, ori=None):
+        ori = np.copy(cell) 
+        cell = np.dot(cell[..., :3], [0.2999, 0.587, 0.114]) 
+        cell = cell > 100
+        return cell, ori
+
+    @staticmethod
     def get_core(cell, ori=None):
         """
         Use to extract only the kernel of the cell
@@ -237,9 +244,9 @@ class WhiteBloodCellClassification:
         :return:
         """
         if ori is None:
-            cell, ori = cell
+            cell, ori = cell, np.copy(cell)
         shape = np.uint8(np.invert(morph.remove_small_holes(cell, 1024)))
-        # plt.imshow(shape, cmap='gray')
+        plt.imshow(shape, cmap='gray')
         zeros = np.zeros((128, 128))
         shape = np.stack((zeros + shape, shape, zeros + shape), axis=2)
         return np.uint8(ori * shape)
@@ -268,3 +275,4 @@ class WhiteBloodCellClassification:
         cell = np.dot(cell[..., :3], [0.2999, 0.587, 0.114])
         cell = cell > 100
         return cell, ori
+
