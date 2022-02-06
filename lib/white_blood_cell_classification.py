@@ -188,7 +188,9 @@ class WhiteBloodCellClassification:
                     logging.warning("train_upon_error is False, model will not be train...")
                     return None
         logging.info("Predicting class...")
-        predicted_class = self.model.predict(self.get_core(data))
+        print("-----------------------------")
+        print(data.shape)
+        predicted_class = self.model.predict(data)
         logging.info("Predicted: " + str(predicted_class))
         return predicted_class
 
@@ -243,10 +245,12 @@ class WhiteBloodCellClassification:
         :param ori:
         :return:
         """
-        if ori is None:
+        if type(cell) == tuple :
+            cell, ori = cell[0], cell[1]
+        elif ori is None:
             cell, ori = cell, np.copy(cell)
         shape = np.uint8(np.invert(morph.remove_small_holes(cell, 1024)))
-        plt.imshow(shape, cmap='gray')
+        #plt.imshow(shape, cmap='gray')
         zeros = np.zeros((128, 128))
         shape = np.stack((zeros + shape, shape, zeros + shape), axis=2)
         return np.uint8(ori * shape)

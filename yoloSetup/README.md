@@ -24,7 +24,7 @@ val: ../BloodCell-Detection-Datatset/valid/images
 ```.yaml
 
 ## Given files
- - `custom_yolov5.yaml` is a given file, we used the basic yolo5s model and added data information for classes.
+ - `custom_yolov5.yaml` : is a given file, we used the basic yolo5s model and added data information for classes.
 
  - `best.pt` : our result of training. 
 
