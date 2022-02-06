@@ -1,5 +1,6 @@
 # CellClassification.py
 #example : python CellClassification.py ../BloodCell-Detection-Datatset/test/images/BloodImage_00386_jpg.rf.c708422b2d9c642f200a853e70012850.jpg
+#example : python CellClassification.py ~/BloodCell-Detection-Datatset/test/images/ ~/yolov5/runs/detect/exp4
 
 import sys
 import os
@@ -13,11 +14,11 @@ from lib import WhiteBloodCellClassification as WBCC
 wbcc = WBCC()
 
 #params
-cutter = False # True if you need to crope images from Yolo5
+cutter = True # True if you need to crope images from Yolo5 and import them in tranfom folder
 analyse = True # True if you need to apply AI on cropped images
 url = 'http://viallet.me/model.zip'
-dataPath = "/home/pavielschertzer/BloodCell-Detection-Datatset/test/images/"
-resultsPath = "/home/pavielschertzer/yolov5/runs/detect/exp4"
+dataPath = "~/BloodCell-Detection-Datatset/test/images/"
+resultsPath = "~/yolov5/runs/detect/exp4"
 projectPath = ""
 def findSplit(result):
     m = 0.0
@@ -52,13 +53,20 @@ def checkInstall() :
 if __name__ == "__main__" :
     argv = sys.argv
 
-    if (len(argv)) < 2 :
-        raise Exception("ERROR : please add file path as input")
-    path = argv[1]
-    
-    projectPath = os.getcwd()
+    if (len(argv)) < 3 :
+        raise Exception("ERROR : please add absolute path for data and results")
 
-    checkInstall()
+    if argv[1][0] == '~' :
+        dataPath = os.path.join(os.path.expanduser('~'), argv[1][1:])
+    else :    
+        dataPath = argv[1]
+    
+    if argv[2][0] == '~' :
+        resultsPath = os.path.join(os.path.expanduser('~', argv[2][1:]))
+    else :
+        resultsPath = argv[2]
+
+    projectPath = os.getcwd()
 
     if cutter :
         for imageFile in os.listdir(resultsPath) :
@@ -102,6 +110,7 @@ if __name__ == "__main__" :
             im.close()
 
     if analyse :
+        checkInstall()
         for image in os.listdir("transform/") :
             path = os.path.join(os.path.join(projectPath, "transform/"), image)
             data = wbcc.get_core(wbcc.resize(path, open_file=True, crop=False, resize=True))
