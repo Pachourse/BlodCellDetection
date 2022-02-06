@@ -16,6 +16,16 @@ customResizeBool = True
 url = 'http://viallet.me/model.zip'
 resultsPath = "/home/pavielschertzer/yolov5/runs/detect/exp4"
 
+def findSplit(result):
+    m = 0.0
+    i = 0
+    j = 0
+    for e in result :
+        if e > m:
+            m = e
+            i = j
+        j += 1
+    return i
 
 def customResize(img) : 
     # resizing image in 128 by 128
@@ -67,11 +77,12 @@ if __name__ == "__main__" :
     r = str(r)[2:-2].split(' ')
     for i in range(len(r)) :
         r[i] = float(r[i])
-    print(r)
-    print(max(r))
+    # print(r)
+    # print(max(r))
+    print(wbcc.get_type(findSplit(r)))
     
     # # returns information
-    #print(wbcc.get_type(max(r[0])))
+    
 
 
     # #image openning and resizing
