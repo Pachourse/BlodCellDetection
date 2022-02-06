@@ -1,0 +1,58 @@
+\label{part1}
+
+\subsection{Dataset utilisé}
+
+Pour les données,nous avons utilisées un dataset mis en ligne sur Kaggle \footnote{\url{https://www.kaggle.com/adhoppin/blood-cell-detection-datatset}}, plateforme organisant des compétitions en data science.\\
+Ce dataset contient 874 images de globules blancs, globules rouges et thrombocytes avec 4888 labels dans 3 classes différentes.\\
+On a donc 765 images d'entraînement, 73 images de validation et 36 images de tests.\\
+Le zoom sur les images est d'environ x2000 ce qui permet d'avoir une vue claire sur les globules avec des détails sur leur composition.\\
+Nous avons choisi de garder les images dans leurs dimensions d'origine en 416x416.\\
+
+\begin{figure}
+    \centering
+    \subfloat[Figure 1]{{
+    \includegraphics[width=6.5 cm,keepaspectratio]{images/BloodImage_00044_jpg.rf.e7760375eba4bc20c5746367e2311e18.jpg}
+    }}
+    \qquad
+    \subfloat[Figure 2]{{
+    \includegraphics[width=6.5 cm, keepaspectratio]{images/BloodImage_00062_jpg.rf.1be1ca0ecdf783798fc10346baaa203e.jpg}
+    }}
+    \caption{2 Images microscopiques de globules blancs et rouges dans le sang, zoom x2000}
+    \label{fig:example}
+\end{figure}
+
+
+Nous avons ensuite utilisé un deuxième dataset pour les différents globules blancs. Nous avons dans un premier temps choisi d’utiliser le dataset d’une université chinoise. Malheureusement après vérification il s’est avéré que celui-ci n’était pas fiable et que certaines cellules n’étaient pas correctement identifiées. Nous avons donc fait le choix de changer de dataset pour un plus récent ayant été clairement créé dans le but d’être utilisé pour l’entrainement d’algorithme de classification de globule blanc. \footnote{\url{https://raabindata.com/free-data/}}.
+
+Le dataset utilisé est divisé en deux dossiers entraînement et test. On a 10176 images microscopiques de globules blancs avec 75\% d'images d'entraînement et 25\% validation, le dossier test contient 4430 images.
+Chaque dossier contient 5 sous-dossiers correspondant aux différents types de globules blancs que nous voulons prédire: neutrophiles, éosinophiles, basophiles, monocytes et lymphocytes.
+Chaque image a une résolution de 500x500 qui va être modifiée en 128x128 et permettra ainsi d'optimiser la mémoire GPU.
+
+
+\begin{figure}
+    \centering
+    \subfloat[Figure 1]{{
+    \includegraphics[width=6.5 cm,keepaspectratio]{images/white_cell_1}
+    }}
+    \qquad
+    \subfloat[Figure 2]{{
+    \includegraphics[width=6.5 cm, keepaspectratio]{images/white_cell_2}
+    }}
+    \caption{2 Images microscopiques de globules blancs neutrophiles, zoom x4000}
+    \label{fig:example}
+\end{figure}
+
+\subsection{Formes, couleurs et taille des globules rouges et globules blancs}
+
+Les globules rouges ont une forme de disque biconcave d’un diamètre de 7 micromètres et ne possèdent pas de noyaux.
+
+Les hématies sont reconnaissables par leur couleur rouge dû à la présence d’hémoglobine, protéine avec un pigment rouge, les globules rouges sont aussi appelés érythrocytes, composés des mots grecs erythros signifiant rouge et kutos signifiant cellule.
+
+Les globules blancs possèdent un noyau et une couche intermédiaire, elles sont incolores avec une taille comprise entre 10 et 15 μm. 
+Il n'y a qu'un seul type de globules rouges alors qu'il existe 3 grands types de globules blancs: 	
+Granulocytes, monocytes et lymphocytes.
+Ces granulocytes regroupent eux-même plusieurs sous-types selon leur coloration: les neutrophiles, les éosinophiles et les basophiles.
+\\
+
+
+\newpage
