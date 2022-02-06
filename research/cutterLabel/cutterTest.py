@@ -28,14 +28,12 @@ for partPath in ["train", 'test', "valid"] :
         width, height = im.size
         number=0
         for label in f :
-            print("----")
             catego, x, y, dx, dy = label.split(' ')
 
             if float(dx) == 0 or float(dy) == 0 : 
-                print("COUCOU")
                 continue
 
-            catego = int(catego)
+            catego = int(catego) #2 pour WC
             x = int(float(x) * width)
             y = int(float(y) * height)
             dx = int((float(dx) * width) / 2)

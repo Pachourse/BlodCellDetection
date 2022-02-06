@@ -188,8 +188,6 @@ class WhiteBloodCellClassification:
                     logging.warning("train_upon_error is False, model will not be train...")
                     return None
         logging.info("Predicting class...")
-        print("-----------------------------")
-        print(data.shape)
         predicted_class = self.model.predict(data)
         logging.info("Predicted: " + str(predicted_class))
         return predicted_class
