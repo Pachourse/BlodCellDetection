@@ -252,25 +252,26 @@ class WhiteBloodCellClassification:
         return np.uint8(ori * shape)
 
     @staticmethod
-    def resize(cell, open_file=False):
+    def resize(cell, open_file=False, crop=True):
         """
         Primarily used for training since the source shape of the image are too big (500x500) we convert
         it to a 128x128 shape
         :param cell: the source file
         :param open_file:  is the file currently open
+        :param crop: default True, if the resolution is already 128x128 it should be se to False
         :return: the image in grayscale and the origin
         """
         if open_file:
             cell = cv2.imread(cell)
         shape = cell.shape
-        # Cropping the picture
-        cell = np.delete(cell, np.s_[shape[0] - 150:shape[0]], axis=0)
-        cell = np.delete(cell, np.s_[0:150], axis=0)
-        cell = np.delete(cell, np.s_[shape[0] - 150:shape[0]], axis=1)
-        cell = np.delete(cell, np.s_[0:150], axis=1)
-
-        # resizing
-        cell = cv2.resize(cell, (128, 128), interpolation=cv2.INTER_AREA)
+        if crop:
+            # Cropping the picture
+            cell = np.delete(cell, np.s_[shape[0] - 150:shape[0]], axis=0)
+            cell = np.delete(cell, np.s_[0:150], axis=0)
+            cell = np.delete(cell, np.s_[shape[0] - 150:shape[0]], axis=1)
+            cell = np.delete(cell, np.s_[0:150], axis=1)
+            # resizing
+            cell = cv2.resize(cell, (128, 128), interpolation=cv2.INTER_AREA)
         ori = np.copy(cell)
         cell = np.dot(cell[..., :3], [0.2999, 0.587, 0.114])
         cell = cell > 100
