@@ -2,3 +2,7 @@ env
 .ENV
 .DS_Store
 *.cropped
+wbc/data
+.idea
+venv
+
